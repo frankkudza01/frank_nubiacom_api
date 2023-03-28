@@ -3,6 +3,7 @@ from blog.serializer import PostSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from blog.models import Post
 
 @api_view(['GET','POST'])
 def post_list(request):
