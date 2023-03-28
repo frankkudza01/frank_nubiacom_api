@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
     'rest_framework',
+    'django_filters',
     'rest_framework.authtoken',
 ]
 

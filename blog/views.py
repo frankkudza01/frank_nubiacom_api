@@ -7,14 +7,19 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 #get all posts
-class PostList(APIView):
+class PostList(generics.ListAPIView):
 
-    def get(self,request):
-        posts=Post.objects.all()
-        serializer=PostSerializer(posts,many=True)
-        return Response(serializer.data)
+    queryset=Post.objects.all()
+    serializer_class=PostSerializer
+    filter_backends=(DjangoFilterBackend, SearchFilter)
+    search_fields=('title','description')
+    
 
 # create new post
 class PostCreate(APIView):
@@ -65,4 +70,4 @@ class PostEdit(APIView):
     def delete(self,request,pk):
         post=self.get_object(pk)
         post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_DELTED)
