@@ -30,5 +30,10 @@ class LoginApi(APIView):
         
         token,_ = Token.objects.get_or_create(user=user)
         return Response({'token':token.key}, status=status.HTTP_200_OK)
+
+class Logout(APIView):
+    def get(self, request, format=None):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
         
 
