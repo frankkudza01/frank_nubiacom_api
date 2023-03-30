@@ -14,3 +14,4 @@ class Post(models.Model):
     date_posted=models.DateField(default=timezone.now)
     category=models.CharField(max_length=100, default="Education")
     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    
